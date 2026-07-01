@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Product Price List 2026.05</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif; background: #d8dce8; color: #1a1a2e; font-size: 15px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.page-wrap { width: 100%; max-width: 600px; background: #f0f2f5; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.2); }
+
+/* HEADER */
+.header { background: #1e3a6e; padding: 16px 16px 13px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,0.2); max-width: 600px; width: 100%; }
+.header h1 { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+.header p { font-size: 12px; color: #a8c4f0; margin-top: 3px; font-weight: 600; }
+.header .notice { font-size: 10px; color: #7da8e0; margin-top: 5px; font-weight: 400; line-height: 1.5; }
+
+/* SEARCH */
+.search-wrap { padding: 12px 12px 0; }
+.search-wrap input {
+  width: 100%; padding: 12px 16px;
+  border-radius: 10px; border: 2px solid #d0d7e8;
+  font-size: 15px; outline: none;
+  background: #fff; color: #1a1a2e;
+}
+.search-wrap input::placeholder { color: #9aa5be; }
+.search-wrap input:focus { border-color: #1e3a6e; }
+
+/* TABS */
+.tabs { display: flex; gap: 7px; padding: 12px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  white-space: nowrap; padding: 9px 16px;
+  border-radius: 8px; font-size: 13px; font-weight: 700;
+  cursor: pointer; border: 2px solid #d0d7e8;
+  background: #fff; color: #5a6480; transition: all 0.15s;
+  flex-shrink: 0;
+}
+.tab.active { background: #1e3a6e; color: #fff; border-color: #1e3a6e; }
+
+/* CARDS */
+.cards { padding: 0 12px 24px; }
+
+/* MODEL CARD */
+.model-card {
+  background: #fff; border-radius: 12px;
+  margin-bottom: 12px; overflow: hidden;
+  border: 1.5px solid #d8deec;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* CARD HEADER */
+.card-head {
+  padding: 12px 15px 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.model-name { font-size: 17px; font-weight: 900; color: #fff; letter-spacing: -0.3px; }
+.cat-badge {
+  font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 5px;
+  background: rgba(255,255,255,0.25); color: #fff;
+  white-space: nowrap;
+}
+
+/* CARD BODY */
+.card-body { padding: 12px 14px 14px; }
+
+/* SECTION */
+.sec { margin-bottom: 12px; }
+.sec:last-child { margin-bottom: 0; }
+.sec-title {
+  font-size: 11px; font-weight: 800; color: #8892b0;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  margin-bottom: 7px;
+}
+
+/* ILSIBOL */
+.ilsibol-box {
+  background: #f4f6fb; border-radius: 8px;
+  padding: 11px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  border: 1.5px solid #dde3f0;
+}
+.ilsibol-label { font-size: 14px; color: #6b7a99; font-weight: 600; }
+.ilsibol-price { font-size: 24px; font-weight: 900; color: #1a1a2e; }
+
+/* RENTAL */
+.rental-block { margin-bottom: 7px; }
+.rental-type-bar {
+  font-size: 12px; font-weight: 800;
+  padding: 6px 10px; border-radius: 6px 6px 0 0;
+}
+.rental-type-bar.self  { background: #dbeafe; color: #1e40af; }
+.rental-type-bar.visit { background: #dcfce7; color: #166534; }
+
+.rental-table { width: 100%; border-collapse: collapse; border-radius: 0 0 6px 6px; overflow: hidden; }
+.rental-table th {
+  font-size: 11px; font-weight: 700; color: #6b7a99;
+  padding: 7px 8px; text-align: center;
+  border-bottom: 1.5px solid #e8edf5;
+  background: #f8fafc;
+}
+.rental-table th:first-child { text-align: left; padding-left: 11px; }
+.rental-table td {
+  padding: 9px 8px; text-align: center;
+  font-size: 16px; font-weight: 800;
+  border-bottom: 1px solid #f0f2f8;
+  background: #fff;
+}
+.rental-table td:first-child {
+  text-align: left; padding-left: 11px;
+  font-size: 13px; font-weight: 700; color: #8892b0;
+}
+.rental-table tr:last-child td { border-bottom: none; }
+.self-price  { color: #1e40af; }
+.visit-price { color: #166534; }
+
+/* MEM / WECARE */
+.service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.service-box { border-radius: 8px; padding: 10px 12px; }
+.service-label { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+.service-price { font-size: 19px; font-weight: 900; }
+.service-mo { font-size: 11px; font-weight: 600; opacity: 0.65; }
+
+.mem-self  { background: #eff6ff; }
+.mem-self  .service-label { color: #1e40af; }
+.mem-self  .service-price { color: #1d4ed8; }
+.mem-visit { background: #f0fdf4; }
+.mem-visit .service-label { color: #166534; }
+.mem-visit .service-price { color: #15803d; }
+.wc-self   { background: #fff1f2; }
+.wc-self   .service-label { color: #9f1239; }
+.wc-self   .service-price { color: #be123c; }
+.wc-visit  { background: #fff7ed; }
+.wc-visit  .service-label { color: #9a3412; }
+.wc-visit  .service-price { color: #c2410c; }
+
+/* FILTER */
+.filter-item {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 8px 0; border-bottom: 1px solid #eef0f6;
+}
+.filter-item:last-child { border-bottom: none; }
+.filter-left { flex: 1; padding-right: 10px; }
+.filter-name { font-size: 13px; color: #6b7a99; display: block; }
+.filter-cycle { font-size: 11px; font-weight: 700; color: #7c3aed; margin-top: 3px; display: block; }
+.filter-price { font-size: 15px; font-weight: 800; color: #6d28d9; white-space: nowrap; padding-top: 1px; }
+.filter-bundle .filter-name { color: #5b21b6; font-weight: 700; }
+.filter-bundle .filter-price { font-size: 16px; }
+
+.divider { height: 1px; background: #eef0f6; margin: 10px 0; }
+.note-text { font-size: 12px; color: #dc2626; font-style: italic; padding: 4px 0; }
+.empty-msg { text-align: center; color: #9aa5be; font-size: 15px; padding: 50px 0; }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+<div class="header">
+  <h1>Product Price List</h1>
+  <p>As of May 2026</p>
+  <div class="notice">All prices are tax excluded &nbsp;|&nbsp; Prices are subject to change without notice</div>
+</div>
+
+<div class="search-wrap">
+  <input type="text" id="searchInput" placeholder="Search model..." oninput="render()">
+</div>
+
+<div class="tabs" id="tabsEl"></div>
+<div class="cards" id="cardsEl"></div>
+
+<script>
+const CAT_COLORS = {
+  "Water Purifier": "#1e3a6e",
+  "Air Cleaner":    "#1a5c38",
+  "Cleanser":       "#4c1d95",
+  "Bidet":          "#7c2d12",
+  "Massage":        "#7f1d1d"
+};
+
+const MODELS = [
+  {cat:"Water Purifier",model:"CP-MN031W",ilsibol:599,
+    rs:{"36":30.99,"60":23.99,"72":22.99,"36d":27.99,"60d":20.99,"72d":19.99},
+    rv:{"36":38.99,"60":32.99,"72":30.99,"36d":35.99,"60d":30.99,"72d":28.99},
+    mem:{self:14.99,visit:18.99},wc:{self:16.99,visit:21.99}},
+  {cat:"Water Purifier",model:"CP-P012",ilsibol:1499,
+    rs:{"36":52.99,"60":38.99,"72":35.99,"36d":49.99,"60d":36.99,"72d":33.99},
+    rv:{"36":58.99,"60":47.99,"72":45.99,"36d":55.99,"60d":45.99,"72d":43.99},
+    mem:{self:16.99,visit:20.99},wc:{self:34.99,visit:42.99}},
+  {cat:"Water Purifier",model:"CP-TN102S(GPK)",ilsibol:1399,
+    rs:{"36":47.99,"60":33.99,"72":31.99,"36d":44.99,"60d":31.99,"72d":29.99},
+    rv:{"36":54.99,"60":44.99,"72":41.99,"36d":51.99,"60d":42.99,"72d":39.99},
+    mem:{self:16.99,visit:20.99},wc:{self:31.99,visit:42.99}},
+  {cat:"Water Purifier",model:"CP-TN100S(DS)",ilsibol:1599,
+    rs:{"36":52.99,"60":38.99,"72":36.99,"36d":49.99,"60d":36.99,"72d":34.99},
+    rv:{"36":60.99,"60":50.99,"72":48.99,"36d":57.99,"60d":48.99,"72d":46.99},
+    mem:{self:16.99,visit:20.99},wc:{self:36.99,visit:44.99}},
+  {cat:"Water Purifier",model:"CP-ABNC100",ilsibol:1749,
+    rs:{"36":54.99,"60":40.99,"72":38.99,"36d":51.99,"60d":38.99,"72d":36.99},
+    rv:{"36":62.99,"60":52.99,"72":50.99,"36d":59.99,"60d":50.99,"72d":48.99},
+    mem:{self:18.99,visit:22.99},wc:{self:39.99,visit:51.99}},
+  {cat:"Water Purifier",model:"CP-SN102HW",ilsibol:2199,
+    rs:{},rsNote:"Self-Care type discontinued",
+    rv:{"36":79.99,"60":69.99,"72":63.99,"36d":76.99,"60d":67.99,"72d":61.99},
+    mem:{visit:27.99},wc:{visit:67.99}},
+  {cat:"Water Purifier",model:"CP-ACR1620SW",ilsibol:2899,rs:{},
+    rv:{"36":98.99,"60":85.99,"72":79.99,"36d":95.99,"60d":82.99,"72d":76.99},
+    mem:{visit:40.96},wc:{visit:85.99}},
+  {cat:"Water Purifier",model:"CP-WN601HW",ilsibol:1599,rs:{},
+    rv:{"36":52.99,"60":45.99,"72":43.99,"36d":49.99,"60d":43.99,"72d":41.99},
+    mem:{visit:27.50},wc:{visit:35.99}},
+  {cat:"Water Purifier",model:"CP-KN501HW",ilsibol:1499,rs:{},
+    rv:{"36":52.99,"60":43.99,"72":41.99,"36d":49.99,"60d":41.99,"72d":39.99},
+    mem:{visit:24.99},wc:{visit:35.99}},
+  {cat:"Water Purifier",model:"CP-WN601SW",ilsibol:1699,rs:{},
+    rv:{"36":54.99,"60":48.99,"72":44.99,"36d":51.99,"60d":45.99,"72d":41.99},
+    mem:{visit:26.99},wc:{visit:37.99}},
+  {cat:"Water Purifier",model:"CP-FR602SW",ilsibol:1599,rs:{},
+    rv:{"36":41.99,"60":47.99,"72":44.99,"36d":52.99,"60d":44.99,"72d":42.99},
+    mem:{visit:26.99},wc:{visit:42.99}},
+  {cat:"Water Purifier",model:"CP-ADR051UW",ilsibol:749,
+    rs:{"36":29.99,"60":24.99,"72":22.99,"36d":26.99,"60d":22.99,"72d":20.99},rv:{},
+    mem:{self:13.99},wc:{self:20.99}},
+  {cat:"Water Purifier",model:"CP-AAN100",ilsibol:1799,
+    rs:{"36":39.99,"60":34.99,"72":56.99,"36d":37.99,"60d":39.99,"72d":53.99},
+    rv:{"36":51.99,"60":53.99,"72":64.99,"36d":49.99,"60d":51.99,"72d":61.99},
+    mem:{self:19.99,visit:23.99},wc:{self:39.99,visit:51.99}},
+  {cat:"Water Purifier",model:"CP-AKN011SP/GB",ilsibol:799,
+    rs:{"36":33.99,"60":25.99,"72":24.99,"36d":30.99,"60d":22.99,"72d":21.99},
+    rv:{"36":41.99,"60":37.99,"72":35.99,"36d":39.99,"60d":34.99,"72d":33.99},
+    mem:{self:15.99,visit:20.99},wc:{self:20.99,visit:27.99}},
+  {cat:"Air Cleaner",model:"CAC-AH2810FNW",ilsibol:1299,
+    rs:{"36":47.99,"60":36.99,"72":31.99,"36d":44.99,"60d":34.99,"72d":29.99},
+    rv:{"36":54.99,"60":45.99,"72":43.99,"36d":51.99,"60d":43.99,"72d":41.99},
+    mem:{self:16.99,visit:20.99},wc:{self:32.99,visit:39.99}},
+  {cat:"Air Cleaner",model:"CAC-F3010FW",ilsibol:1199,
+    rs:{"36":49.99,"60":38.99,"72":33.99,"36d":46.99,"60d":36.99,"72d":31.99},
+    rv:{"36":57.99,"60":46.99,"72":43.99,"36d":54.99,"60d":44.99,"72d":41.99},
+    mem:{self:17.99,visit:21.99},wc:{self:34.99,visit:40.99}},
+  {cat:"Air Cleaner",model:"CAC-D2020FW",ilsibol:999,
+    rs:{"36":43.99,"60":32.99,"72":28.99,"36d":40.99,"60d":29.99,"72d":26.99},
+    rv:{"36":50.99,"60":41.99,"72":39.99,"36d":47.99,"60d":39.99,"72d":37.99},
+    mem:{self:15.99,visit:19.99},wc:{self:27.99,visit:32.99}},
+  {cat:"Air Cleaner",model:"CAC-AA0910FW",ilsibol:699,
+    rs:{"36":28.99,"60":21.99,"72":19.99,"36d":25.99,"60d":19.99,"72d":17.99},
+    rv:{"36":35.99,"60":27.99,"72":25.99,"36d":33.99,"60d":25.99,"72d":23.99},
+    mem:{self:10.99,visit:16.99},wc:{self:20.99,visit:26.99}},
+  {cat:"Cleanser",model:"CWS-AO201W",ilsibol:599,
+    rs:{"36":26.99,"60":19.99,"72":17.99,"36d":23.99,"60d":17.99,"72d":15.99},rv:{},
+    mem:{self:7.99},wc:{self:17.99}},
+  {cat:"Bidet",model:"CBT-IS1131",ilsibol:649,
+    rs:{"36":31.99,"60":22.99,"72":19.99,"36d":28.99,"60d":20.99,"72d":17.99},rv:{},
+    mem:{self:7.99},wc:{self:17.99}},
+  {cat:"Massage",model:"CMS-E410CP",ilsibol:9499,rs:{},rv:{},rental:{"60d500":159},mem:{},wc:{}},
+  {cat:"Massage",model:"CMS-D10SLGB",ilsibol:5499,rs:{},rv:{},rental:{"60d500":89},mem:{},wc:{}}
+];
+
+const FILTERS = [
+  // CP-TN102S(GPK)
+  {cat:"Water Purifier",model:"CP-TN102S(GPK)",name:"CARBON-COMPOSITE (8\")",price:51.92,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-TN102S(GPK)",name:"NANO POSITIVE 3.0 (8\")",price:56.16,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-TN102S(GPK)",name:"1 Year Bundle",price:216,b:true},
+  // CP-TN100S(DS)
+  {cat:"Water Purifier",model:"CP-TN100S(DS)",name:"CARBON-COMPOSITE (8\")",price:51.92,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-TN100S(DS)",name:"NANO POSITIVE 3.0 (8\")",price:56.16,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-TN100S(DS)",name:"1 Year Bundle",price:216,b:true},
+  // CP-SN102HW
+  {cat:"Water Purifier",model:"CP-SN102HW",name:"SEDIMENT 3.0",price:41.38,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-SN102HW",name:"CARBON-COMPOSITE",price:51.92,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-SN102HW",name:"NANO POSITIVE 3.0",price:66.23,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-SN102HW",name:"1 Year Bundle",price:312,b:true},
+  // CP-ABNC100
+  {cat:"Water Purifier",model:"CP-ABNC100",name:"METAL BLOCK 2.0 (8\")",price:66.66,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-ABNC100",name:"NANO POSITIVE 3.0 (8\")",price:66.23,cycleS:8,cycleV:8},
+  {cat:"Water Purifier",model:"CP-ABNC100",name:"1 Year Bundle",price:240,b:true},
+  // CP-P012
+  {cat:"Water Purifier",model:"CP-P012",name:"SEDI CARBON COMPOSITE (4\")",price:29.31,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-P012",name:"NATURAL PLUS (4\")",price:38.57,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-P012",name:"NANO POSITIVE (4\")",price:38.57,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-P012",name:"1 Year Bundle",price:216,b:true},
+  // CP-MN031W
+  {cat:"Water Purifier",model:"CP-MN031W",name:"PRE CARBON BLOCK 2.0 (8\")",price:46.38,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-MN031W",name:"NANO POSITIVE PLUS (8\")",price:55.22,cycleS:12,cycleV:12},
+  {cat:"Water Purifier",model:"CP-MN031W",name:"MINERALIZER (8\")",price:55.22,cycleS:12,cycleV:12},
+  {cat:"Water Purifier",model:"CP-MN031W",name:"1 Year Bundle",price:192,b:true},
+  // CP-KN501HW (VISIT only)
+  {cat:"Water Purifier",model:"CP-KN501HW",name:"SEDIMENT 3.0 (8\")",price:45.74,cycleV:4},
+  {cat:"Water Purifier",model:"CP-KN501HW",name:"PRE CARBON 2.0 (8\")",price:55.81,cycleV:8},
+  {cat:"Water Purifier",model:"CP-KN501HW",name:"NATURAL 2.0 (8\")",price:66.45,cycleV:12},
+  {cat:"Water Purifier",model:"CP-KN501HW",name:"NANO POSITIVE (8\")",price:65.24,cycleV:12},
+  {cat:"Water Purifier",model:"CP-KN501HW",name:"1 Year Bundle",price:324,b:true},
+  // CP-WN601HW (VISIT only)
+  {cat:"Water Purifier",model:"CP-WN601HW",name:"Sediment 3.0",price:30.36,cycleV:6},
+  {cat:"Water Purifier",model:"CP-WN601HW",name:"PRE CARBON BLOCK 2.0",price:61.32,cycleV:6},
+  {cat:"Water Purifier",model:"CP-WN601HW",name:"NATURAL 2.0",price:70.32,cycleV:12},
+  {cat:"Water Purifier",model:"CP-WN601HW",name:"NANO POSITIVE 3.0C",price:113.04,cycleV:12},
+  {cat:"Water Purifier",model:"CP-WN601HW",name:"1 Year Bundle",price:366.72,b:true},
+  // CP-WN601SW (VISIT only)
+  {cat:"Water Purifier",model:"CP-WN601SW",name:"PRE CARBON BLOCK 3.0",price:68.88,cycleV:6},
+  {cat:"Water Purifier",model:"CP-WN601SW",name:"NATURAL PLUS 2.0",price:78.60,cycleV:12},
+  {cat:"Water Purifier",model:"CP-WN601SW",name:"NANO POSITIVE 3.0C",price:113.04,cycleV:12},
+  {cat:"Water Purifier",model:"CP-WN601SW",name:"1 Year Bundle",price:329.40,b:true},
+  // CP-FR602SW (VISIT only)
+  {cat:"Water Purifier",model:"CP-FR602SW",name:"Reverse Osmosis",price:71.42,cycleV:12},
+  {cat:"Water Purifier",model:"CP-FR602SW",name:"Mineralize",price:160.72,cycleV:12},
+  {cat:"Water Purifier",model:"CP-FR602SW",name:"1 Year Bundle",price:348,b:true},
+  // CP-ACR1620SW (VISIT only)
+  {cat:"Water Purifier",model:"CP-ACR1620SW",name:"Sediment 3.0",price:54.95,cycleV:6},
+  {cat:"Water Purifier",model:"CP-ACR1620SW",name:"Pre Carbon Block 2.0",price:53.56,cycleV:6},
+  {cat:"Water Purifier",model:"CP-ACR1620SW",name:"Reverse Osmosis",price:160.72,cycleV:12},
+  {cat:"Water Purifier",model:"CP-ACR1620SW",name:"Natural 3.0",price:71.42,cycleV:12},
+  {cat:"Water Purifier",model:"CP-ACR1620SW",name:"1 Year Bundle",price:410,b:true},
+  // CP-ADR051UW
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"SEDIMENT",price:18.72,cycleS:4,cycleV:4},
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"PRE CARBON BLOCK 3.0",price:18.72,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"SEDIMENT 3.0",price:21.84,cycleS:6,cycleV:8},
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"NATURAL 3.0",price:56.17,cycleS:12,cycleV:12},
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"REVERSE OSMOSIS",price:24.96,cycleS:12,cycleV:12},
+  {cat:"Water Purifier",model:"CP-ADR051UW",name:"1 Year Bundle",price:185,b:true},
+  // Air Cleaner
+  {cat:"Air Cleaner",model:"CAC-F3010FW",name:"Pre-Filter",price:49.39,cycleS:12,cycleV:"N/A"},
+  {cat:"Air Cleaner",model:"CAC-F3010FW",name:"Allergen Filter",price:16.46,cycleS:4,cycleV:4},
+  {cat:"Air Cleaner",model:"CAC-F3010FW",name:"Ultra-Deo PM 2.5",price:197.62,cycleS:12,cycleV:12},
+  {cat:"Air Cleaner",model:"CAC-F3010FW",name:"1 Year Bundle",price:228,b:true},
+  {cat:"Air Cleaner",model:"CAC-D2020FW",name:"Pre-Filter",price:42.77,cycleS:12,cycleV:"N/A"},
+  {cat:"Air Cleaner",model:"CAC-D2020FW",name:"Allergen Filter",price:17.11,cycleS:4,cycleV:4},
+  {cat:"Air Cleaner",model:"CAC-D2020FW",name:"Ultra-Deo PM 2.5",price:171.11,cycleS:12,cycleV:12},
+  {cat:"Air Cleaner",model:"CAC-D2020FW",name:"1 Year Bundle",price:204,b:true},
+  {cat:"Air Cleaner",model:"CAC-AA0910FW",name:"All-in-One Filter",price:140,cycleS:12,cycleV:12},
+  // Cleanser
+  {cat:"Cleanser",model:"CWS-AO201W",name:"Clean Filter",price:31.20,cycleS:3,cycleV:3},
+  {cat:"Cleanser",model:"CWS-AO201W",name:"1 Year Bundle",price:96,b:true},
+  // Bidet
+  {cat:"Bidet",model:"CBT-IS1131",name:"Clean Filter",price:41.60,cycleS:4,cycleV:4},
+  {cat:"Bidet",model:"CBT-IS1131",name:"1 Year Bundle",price:96,b:true}
+];
+
+function p(v) {
+  if (v === null || v === undefined) return '-';
+  return '$' + Number(v).toFixed(2).replace(/\.00$/, '');
+}
+
+function rentalTable(data, type) {
+  if (!data || Object.keys(data).length === 0) return '';
+  const cls = type === 'self' ? 'self' : 'visit';
+  const label = type === 'self' ? 'SELF (Self-Care)' : 'VISIT (In-Home Care)';
+  const pc = type === 'self' ? 'self-price' : 'visit-price';
+  const h36 = data['36'] !== undefined, h60 = data['60'] !== undefined, h72 = data['72'] !== undefined;
+  return `<div class="rental-block">
+    <div class="rental-type-bar ${cls}">${label}</div>
+    <table class="rental-table">
+      <tr>
+        <th>Term</th>
+        ${h36 ? '<th>36 mo</th>' : ''}
+        ${h60 ? '<th>60 mo</th>' : ''}
+        ${h72 ? '<th>72 mo</th>' : ''}
+      </tr>
+      <tr>
+        <td>DP $0</td>
+        ${h36 ? `<td class="${pc}">${p(data['36'])}</td>` : ''}
+        ${h60 ? `<td class="${pc}">${p(data['60'])}</td>` : ''}
+        ${h72 ? `<td class="${pc}">${p(data['72'])}</td>` : ''}
+      </tr>
+      <tr>
+        <td>DP $100</td>
+        ${h36 ? `<td class="${pc}">${p(data['36d'])}</td>` : ''}
+        ${h60 ? `<td class="${pc}">${p(data['60d'])}</td>` : ''}
+        ${h72 ? `<td class="${pc}">${p(data['72d'])}</td>` : ''}
+      </tr>
+    </table>
+  </div>`;
+}
+
+function filterCycleText(f) {
+  if (f.b) return '';
+  const s = f.cycleS, v = f.cycleV;
+  if (s == null && v == null) return '';
+  const fmtS = s != null ? (typeof s === 'number' ? `${s} mo` : s) : null;
+  const fmtV = v != null ? (typeof v === 'number' ? `${v} mo` : v) : null;
+  if (fmtS && fmtV && fmtS === fmtV) return `🔄 Every ${fmtS}`;
+  if (fmtS && fmtV) return `🔄 SELF ${fmtS} · VISIT ${fmtV}`;
+  if (fmtS) return `🔄 SELF ${fmtS}`;
+  if (fmtV) return `🔄 VISIT ${fmtV}`;
+  return '';
+}
+
+function buildCard(m) {
+  const color = CAT_COLORS[m.cat] || '#1a1a2e';
+  let html = `<div class="model-card">
+    <div class="card-head" style="background:${color}">
+      <span class="model-name">${m.model}</span>
+      <span class="cat-badge">${m.cat}</span>
+    </div>
+    <div class="card-body">`;
+
+  if (m.ilsibol && typeof m.ilsibol === 'number') {
+    html += `<div class="sec">
+      <div class="sec-title">One-Time Purchase</div>
+      <div class="ilsibol-box">
+        <span class="ilsibol-label">Cash / Card</span>
+        <span class="ilsibol-price">${p(m.ilsibol)}</span>
+      </div>
+    </div>`;
+  }
+
+  if (m.rental && Object.keys(m.rental).length > 0) {
+    html += `<div class="sec"><div class="sec-title">Rental</div>
+    <div class="rental-block"><table class="rental-table">
+      <tr><th>Term</th><th>60 mo</th></tr>
+      <tr><td>DP $500</td><td class="self-price">${p(m.rental['60d500'])}</td></tr>
+    </table></div></div>`;
+  }
+
+  const hasR = (m.rs && Object.keys(m.rs).length > 0) || (m.rv && Object.keys(m.rv).length > 0) || m.rsNote;
+  if (hasR) {
+    html += `<div class="sec"><div class="sec-title">Rental (Monthly Payment)</div>`;
+    if (m.rsNote) html += `<div class="note-text">${m.rsNote}</div>`;
+    if (m.rs && Object.keys(m.rs).length > 0) html += rentalTable(m.rs, 'self');
+    if (m.rv && Object.keys(m.rv).length > 0) html += rentalTable(m.rv, 'visit');
+    html += `</div>`;
+  }
+
+  const hasMem = m.mem && (m.mem.self || m.mem.visit);
+  const hasWC  = m.wc  && (m.wc.self  || m.wc.visit);
+  if (hasMem || hasWC) {
+    html += `<div class="divider"></div>
+    <div class="sec">
+      <div class="sec-title">Membership &amp; WeCare (Monthly)</div>
+      <div class="service-grid">`;
+    if (m.mem?.self)  html += `<div class="service-box mem-self"><div class="service-label">Membership SELF</div><div class="service-price">${p(m.mem.self)}<span class="service-mo">/mo</span></div></div>`;
+    if (m.mem?.visit) html += `<div class="service-box mem-visit"><div class="service-label">Membership VISIT</div><div class="service-price">${p(m.mem.visit)}<span class="service-mo">/mo</span></div></div>`;
+    if (m.wc?.self)   html += `<div class="service-box wc-self"><div class="service-label">WeCare SELF</div><div class="service-price">${p(m.wc.self)}<span class="service-mo">/mo</span></div></div>`;
+    if (m.wc?.visit)  html += `<div class="service-box wc-visit"><div class="service-label">WeCare VISIT</div><div class="service-price">${p(m.wc.visit)}<span class="service-mo">/mo</span></div></div>`;
+    html += `</div></div>`;
+  }
+
+  const filters = FILTERS.filter(f => f.model === m.model && f.name);
+  if (filters.length > 0) {
+    html += `<div class="divider"></div>
+    <div class="sec"><div class="sec-title">Filter Price</div>`;
+    for (const f of filters) {
+      const cycle = filterCycleText(f);
+      html += `<div class="filter-item${f.b ? ' filter-bundle' : ''}">
+        <div class="filter-left">
+          <span class="filter-name">${f.name}</span>
+          ${cycle ? `<span class="filter-cycle">${cycle}</span>` : ''}
+        </div>
+        <span class="filter-price">${p(f.price)}</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `</div></div>`;
+  return html;
+}
+
+// Tabs
+const cats = ['All', ...new Set(MODELS.map(m => m.cat))];
+const tabsEl = document.getElementById('tabsEl');
+cats.forEach((cat, i) => {
+  const t = document.createElement('div');
+  t.className = 'tab' + (i === 0 ? ' active' : '');
+  t.textContent = cat;
+  t.dataset.cat = cat;
+  t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    render();
+  };
+  tabsEl.appendChild(t);
+});
+
+function render() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const activeCat = document.querySelector('.tab.active')?.dataset.cat || '전체';
+  const filtered = MODELS.filter(m => {
+    const matchCat = activeCat === 'All' || m.cat === activeCat;
+    const matchSearch = !search || m.model.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+  const el = document.getElementById('cardsEl');
+  el.innerHTML = filtered.length === 0
+    ? '<div class="empty-msg">No results found</div>'
+    : filtered.map(buildCard).join('');
+}
+
+render();
+</script>
+</div>
+</body>
+</html>
